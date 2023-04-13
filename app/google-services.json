@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "312637351384",
+    "project_id": "siral-52c86",
+    "storage_bucket": "siral-52c86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312637351384:android:f8beffa54cbf1f346efead",
+        "android_client_info": {
+          "package_name": "com.siral.food_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312637351384-j9se5bhrusuirkbehuj13vi402b7l0uh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.siral.food_application",
+            "certificate_hash": "002aba4089890606475c0535aab2637207094ef8"
+          }
+        },
+        {
+          "client_id": "312637351384-ttgq6vkh3d6jsvjbjdf366q1gl2lmpue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDoIrtOSh0XGux7ACsG853rojpnsQTUTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312637351384-ttgq6vkh3d6jsvjbjdf366q1gl2lmpue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
