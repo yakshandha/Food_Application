@@ -85,22 +85,19 @@ fun FormScreen(navController: NavHostController, userType: String?,formScreenVM:
 
             )
         OutlinedTextField(
-            value = formScreenVM.numberOfPersons,
+            value = formScreenVM.phoneNumber,
             onValueChange = { it ->
-                if(it.length<=4)
-                    formScreenVM.numberOfPersons = it.filter { it.isDigit() }
+                formScreenVM.phoneNumber = it
             },
             modifier = Modifier
-                .padding(top = 30.dp)
+                .padding(top = 20.dp)
                 .fillMaxWidth()
-                .height(56.dp)
-                .onFocusChanged {
-//                    if (!it.isFocused && formScreenVM.numberOfPersons != "")
-                },
+                .height(56.dp),
             singleLine = true,
+            enabled = false,
             placeholder = {
                 Text(
-                    text = "No of Persons",
+                    text = "Phone Number",
                     style = urbanMedium,
                     fontSize = 15.sp,
                     color = PlaceholderGray
@@ -116,17 +113,6 @@ fun FormScreen(navController: NavHostController, userType: String?,formScreenVM:
                 focusedBorderColor = Color.Gray, cursorColor = PlaceholderGray
             )
         )
-        if(formScreenVM.isPersonsError)
-            Text(
-                text = "Enter a valid Number of Persons",
-                color = Color.Red,
-                fontSize = 12.sp,
-                style = urbanSemiBold,
-                modifier = Modifier.align(
-                    Alignment.Start
-                ).padding(top = 12.dp)
-
-            )
         OutlinedTextField(
             value = formScreenVM.address,
             onValueChange = { it ->
@@ -161,6 +147,49 @@ fun FormScreen(navController: NavHostController, userType: String?,formScreenVM:
         if(formScreenVM.isAddressError)
             Text(
                 text = "Enter a valid Address",
+                color = Color.Red,
+                fontSize = 12.sp,
+                style = urbanSemiBold,
+                modifier = Modifier.align(
+                    Alignment.Start
+                ).padding(top = 12.dp)
+
+            )
+        OutlinedTextField(
+            value = formScreenVM.numberOfPersons,
+            onValueChange = { it ->
+                if(it.length<=4)
+                    formScreenVM.numberOfPersons = it.filter { it.isDigit() }
+            },
+            modifier = Modifier
+                .padding(top = 30.dp)
+                .fillMaxWidth()
+                .height(56.dp)
+                .onFocusChanged {
+//                    if (!it.isFocused && formScreenVM.numberOfPersons != "")
+                },
+            singleLine = true,
+            placeholder = {
+                Text(
+                    text = "No of Persons",
+                    style = urbanMedium,
+                    fontSize = 15.sp,
+                    color = PlaceholderGray
+                )
+            },
+            keyboardOptions = KeyboardOptions( imeAction = ImeAction.Done ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    focusManager.clearFocus()
+                }
+            ),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.Gray, cursorColor = PlaceholderGray
+            )
+        )
+        if(formScreenVM.isPersonsError)
+            Text(
+                text = "Enter a valid Number of Persons",
                 color = Color.Red,
                 fontSize = 12.sp,
                 style = urbanSemiBold,

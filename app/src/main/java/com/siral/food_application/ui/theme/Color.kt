@@ -9,3 +9,4 @@ val Teal200 = Color(0xFF03DAC5)
 
 val BlueHue = Color(0xFFE7EEF0)
 val PlaceholderGray = Color(0xFF94A5AB)
+val BoxGrey =Color(0XFFD9D9D9)

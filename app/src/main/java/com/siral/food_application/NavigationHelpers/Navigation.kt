@@ -13,7 +13,8 @@ import com.siral.food_application.Pages.LoginScreen.LoginScreen
 import com.siral.food_application.Pages.ProfileScreen.ProfileScreen
 import com.siral.food_application.Pages.SignUpScreen.SignUpScreen
 import com.siral.food_application.Pages.SplashScreen.SplashScreen
-import com.siral.food_application.Pages.UserSelectScreen.UserSelectScreen
+import com.siral.food_application.Pages.UserProfileFlow.DonationRequests.DonationRequestListScreen
+import com.siral.food_application.Pages.UserProfileFlow.UserSelectScreen.UserSelectScreen
 
 @Composable
 fun Navigation(navController: NavHostController)
@@ -52,6 +53,10 @@ fun Navigation(navController: NavHostController)
         composable(NavRoute.DonationDetailScreen.route)
         {
             DonationDetailScreen(navController)
+        }
+        composable(NavRoute.DonationRequestScreen.route)
+        {
+            DonationRequestListScreen(navController)
         }
 
     }

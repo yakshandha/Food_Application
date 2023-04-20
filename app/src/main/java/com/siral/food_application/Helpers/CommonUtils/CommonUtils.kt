@@ -3,6 +3,7 @@ package com.siral.food_application.Helpers.CommonUtils
 import android.util.Log
 import com.siral.food_application.BOs.ClientDetails
 import com.siral.food_application.BOs.DonationBO
+import com.siral.food_application.BOs.DonationRequestBO
 import com.siral.food_application.BOs.SignUpBO
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -12,6 +13,7 @@ object CommonUtils {
     var donationBO : ClientDetails =ClientDetails()
     var donationDetailBO : DonationBO = DonationBO()
     var userDetail : SignUpBO = SignUpBO()
+    var donationRequestBO : DonationRequestBO = DonationRequestBO()
     fun emailFocusChange(email:String) : Boolean
     {
         try {

@@ -7,6 +7,15 @@ data class DonationBO(
     val time : String="",
     val userId : String="",
     val address : String="",
-    val notes : String?="",
-    val donationStatus : String=""
+    val notes : String ="",
+    val phoneNumber : String ="",
+    val donationStatus : String="",
+    val requestId : String =""
 )
+
+enum class DonationStatus(val key : String)
+{
+    Initialised("initialised"),
+    Requested("requested"),
+    Accepted("accepted")
+}

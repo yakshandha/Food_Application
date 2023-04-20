@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.siral.food_application.BOs.DonationBO
+import com.siral.food_application.BOs.DonationStatus
 import com.siral.food_application.Helpers.CommonUtils.CommonUtils.userDetail
 import com.siral.food_application.NavigationHelpers.NavRoute
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +36,8 @@ class FormScreenVM:FormScreenModel() {
                             userDetail.userId,
                             address,
                             notes,
-                            "donated"
+                            phoneNumber,
+                            DonationStatus.Initialised.key
                         )
                         database.child(donationId).setValue(donation)
                             .addOnSuccessListener {

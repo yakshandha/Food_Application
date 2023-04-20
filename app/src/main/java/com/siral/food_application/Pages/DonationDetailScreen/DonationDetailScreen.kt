@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -25,8 +24,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.siral.food_application.Helpers.CommonUtils.CommonUtils.donationBO
 import com.siral.food_application.Helpers.CommonUtils.CommonUtils.donationDetailBO
 import com.siral.food_application.NavigationHelpers.NavRoute
 import com.siral.food_application.R
@@ -35,7 +34,7 @@ import com.siral.food_application.ui.theme.urbanBold
 import com.siral.food_application.ui.theme.urbanist
 
 @Composable
-fun DonationDetailScreen(navController: NavHostController) {
+fun DonationDetailScreen(navController: NavHostController, vm : DonationDetailVM = viewModel()) {
     val context = LocalContext.current
     Log.d("details", donationDetailBO.toString())
     Column(
@@ -159,7 +158,7 @@ fun DonationDetailScreen(navController: NavHostController) {
                         )
                     )
                     {
-                        append("Email : ")
+                        append("Phone : ")
                     }
                     withStyle(
                         style = SpanStyle(
@@ -169,7 +168,7 @@ fun DonationDetailScreen(navController: NavHostController) {
                         )
                     )
                     {
-                        append("shananth@gmail.com")
+                        append(donationDetailBO.phoneNumber)
                     }
                 })
             }
@@ -177,8 +176,7 @@ fun DonationDetailScreen(navController: NavHostController) {
         Button(
             onClick =
             {
-                Toast.makeText(context, "Requested", Toast.LENGTH_SHORT).show()
-                navController.navigate(NavRoute.ProfileScreen.route)
+                vm.submitClicked(navController,context)
             },
             shape = RoundedCornerShape(100),
             colors = ButtonDefaults.buttonColors(

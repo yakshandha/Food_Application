@@ -9,21 +9,21 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.siral.food_application.BOs.DonationBO
+import com.siral.food_application.BOs.DonationStatus
 
 class ListScreenVM :ListScreenModel(){
 
     init {
         database = Firebase.database.getReference("donation_list")
-        getAllDonations()
     }
 
-    private fun getAllDonations() {
+    fun getAllDonations() {
         database
             .addValueEventListener(
                 object : ValueEventListener
                 {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val list = mutableListOf<DonationBO>()
+                        var list = mutableListOf<DonationBO>()
                         for (dataValues in snapshot.children) {
                             val data = dataValues.getValue<DonationBO>()
                             Log.d("dataa", data.toString())
@@ -31,11 +31,15 @@ class ListScreenVM :ListScreenModel(){
                                 list.add(data)
                             }
                         }
-                        donationList.postValue(list)
+                       val list1 = list.filter { it.donationStatus == DonationStatus.Initialised.key }
+                        Log.d("wholelist",list1.toString())
+                        donationList.postValue(list1)
+                        loading = false
                     }
 
                     override fun onCancelled(error: DatabaseError) {
                         donationList.postValue(emptyList())
+                        loading = false
                         Log.d("errorr", "Failed to read value.", error.toException())
                     }
                 }

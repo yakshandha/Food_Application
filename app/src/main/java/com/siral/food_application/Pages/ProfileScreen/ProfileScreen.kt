@@ -12,7 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.siral.food_application.NavigationHelpers.NavRoute
-import com.siral.food_application.Pages.UserSelectScreen.FoodCard
+import com.siral.food_application.Pages.UserProfileFlow.UserSelectScreen.FoodCard
 import com.siral.food_application.ui.theme.Teal200
 import com.siral.food_application.ui.theme.urbanBold
 
@@ -32,7 +32,7 @@ fun ProfileScreen(navController: NavHostController)
         )
 
         FoodCard(name = "Donation Details", desc = "Click to see your donation status") {
-//            navController.navigate(NavRoute.ListScreen.route)
+            navController.navigate(NavRoute.DonationRequestScreen.route)
         }
         FoodCard(name = "Request Details", desc = "Click to see your request status") {
 //            navController.navigate(NavRoute.ListScreen.route)

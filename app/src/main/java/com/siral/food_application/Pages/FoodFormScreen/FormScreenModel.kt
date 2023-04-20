@@ -13,6 +13,7 @@ open class FormScreenModel :ViewModel() {
     var time by mutableStateOf("")
     var address by mutableStateOf(userDetail.address)
     var notes by mutableStateOf("")
+    var phoneNumber by mutableStateOf(userDetail.phoneNumber)
 
     var isPersonsError by mutableStateOf(false)
     var isTimeError by mutableStateOf(false)
