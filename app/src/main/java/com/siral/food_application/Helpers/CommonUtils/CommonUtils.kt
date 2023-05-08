@@ -10,10 +10,8 @@ import java.util.regex.Pattern
 
 object CommonUtils {
 
-    var donationBO : ClientDetails =ClientDetails()
     var donationDetailBO : DonationBO = DonationBO()
     var userDetail : SignUpBO = SignUpBO()
-    var donationRequestBO : DonationRequestBO = DonationRequestBO()
     fun emailFocusChange(email:String) : Boolean
     {
         try {

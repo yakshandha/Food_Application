@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DatabaseReference
+import com.siral.food_application.BOs.DonationBO
 import com.siral.food_application.BOs.DonationRequestBO
 
 open class DonationRequestListModel : ViewModel() {

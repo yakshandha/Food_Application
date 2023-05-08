@@ -1,7 +1,6 @@
 package com.siral.food_application.Pages.DonationDetailScreen
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -27,14 +26,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.siral.food_application.Helpers.CommonUtils.CommonUtils.donationDetailBO
-import com.siral.food_application.NavigationHelpers.NavRoute
 import com.siral.food_application.R
 import com.siral.food_application.ui.theme.Teal200
 import com.siral.food_application.ui.theme.urbanBold
 import com.siral.food_application.ui.theme.urbanist
 
 @Composable
-fun DonationDetailScreen(navController: NavHostController, vm : DonationDetailVM = viewModel()) {
+fun DonationDetailScreen(navController: NavHostController, isReceiver:Boolean?,vm: DonationDetailVM = viewModel()) {
     val context = LocalContext.current
     Log.d("details", donationDetailBO.toString())
     Column(
@@ -176,7 +174,7 @@ fun DonationDetailScreen(navController: NavHostController, vm : DonationDetailVM
         Button(
             onClick =
             {
-                vm.submitClicked(navController,context)
+                vm.submitClicked(navController,context, isReceiver!!)
             },
             shape = RoundedCornerShape(100),
             colors = ButtonDefaults.buttonColors(
@@ -190,7 +188,7 @@ fun DonationDetailScreen(navController: NavHostController, vm : DonationDetailVM
                 .align(CenterHorizontally)
         )
         {
-            Text(text = "Request")
+            Text(text = if(isReceiver == true) "Donate" else "Request")
         }
     }
 }

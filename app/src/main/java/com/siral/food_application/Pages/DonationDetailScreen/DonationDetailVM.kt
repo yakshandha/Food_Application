@@ -13,22 +13,41 @@ import com.siral.food_application.NavigationHelpers.NavRoute
 
 class DonationDetailVM : DonationDetailModel() {
     init {
-        database = Firebase.database.getReference("donation_list")
+        database = Firebase.database.getReference("donation_list/${donationDetailBO.donationId}")
     }
-    fun submitClicked(navController: NavHostController, context: Context) {
+    var recevedDb = Firebase.database.getReference("receiver_list/${donationDetailBO.requestId}")
+    fun submitClicked(navController: NavHostController, context: Context, isReceiver: Boolean) {
         try {
-            val updates = mapOf(
-                "${donationDetailBO.donationId}/donationStatus" to DonationStatus.Requested.key,
-                "${donationDetailBO.donationId}/requestId" to userDetail.userId
-            )
-            database.updateChildren(updates)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Requested", Toast.LENGTH_SHORT).show()
-                    navController.navigate(NavRoute.ProfileScreen.route){
-                        popUpTo(NavRoute.DonationDetailScreen.route){
-                        inclusive = true}
+            if(!isReceiver) {
+                val updates = mapOf(
+                    "donationStatus" to DonationStatus.Requested.key,
+                    "requestId" to userDetail.userId
+                )
+                database.updateChildren(updates)
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Requested", Toast.LENGTH_SHORT).show()
+                        navController.navigate(NavRoute.ProfileScreen.route) {
+                            popUpTo(NavRoute.DonationDetailScreen.route) {
+                                inclusive = true
+                            }
+                        }
                     }
-                }
+            }
+            else{
+                val updates = mapOf(
+                    "${donationDetailBO.donationId}/donationStatus" to DonationStatus.Donated.key,
+                    "${donationDetailBO.donationId}/donationId" to userDetail.userId
+                )
+                recevedDb.updateChildren(updates)
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Donated", Toast.LENGTH_SHORT).show()
+                        navController.navigate(NavRoute.ProfileScreen.route) {
+                            popUpTo(NavRoute.DonationDetailScreen.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+            }
         }
         catch (e: Exception)
         {

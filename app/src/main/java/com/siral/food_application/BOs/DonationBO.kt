@@ -17,5 +17,6 @@ enum class DonationStatus(val key : String)
 {
     Initialised("initialised"),
     Requested("requested"),
+    Donated("donated"),
     Accepted("accepted")
 }

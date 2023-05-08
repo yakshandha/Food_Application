@@ -40,7 +40,7 @@ init {
             isEmailError=emailFocusChange(email = email)
             isPasswordError = password ==""
             if(!isPasswordError&& !isEmailError) {
-               database.orderByChild("emailId").equalTo(email).addValueEventListener(object :
+               database.orderByChild("emailId").equalTo(email.trim()).addValueEventListener(object :
                    ValueEventListener {
                    override fun onDataChange(snapshot: DataSnapshot) {
                        if(snapshot.exists()){

@@ -15,8 +15,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FormScreenVM:FormScreenModel() {
+    private val donateUser = "Donate"
+    val requestUser = "Receive"
     init {
         database = Firebase.database.getReference("donation_list")
+        receiverDB = Firebase.database.getReference("receiver_list")
+
     }
     fun submitClicked(navController: NavHostController, userType: String?, context: Context) {
         try {
@@ -24,33 +28,64 @@ class FormScreenVM:FormScreenModel() {
                 isPersonsError = numberOfPersons == ""
                 isTimeError = time == ""
                 isAddressError = address == ""
-                isNameError = userName ==""
+                isNameError = userName == ""
                 if (!isPersonsError && !isTimeError && !isAddressError) {
-                    val donationId: String? = database.push().key
+                    val donationId: String? = if(userType==donateUser)
+                        database.push().key
+                    else
+                        receiverDB.push().key
                     if (donationId != null) {
-                        val donation = DonationBO(
-                            donationId,
-                            numberOfPersons,
-                            userName,
-                            time,
-                            userDetail.userId,
-                            address,
-                            notes,
-                            phoneNumber,
-                            DonationStatus.Initialised.key
-                        )
-                        database.child(donationId).setValue(donation)
-                            .addOnSuccessListener {
-                                navController.navigate(NavRoute.ListScreen.route)
-                                {
-                                    popUpTo("foodFormScreen/Donate") {
-                                        inclusive = true
+                        if(userType==donateUser) {
+                            val donation = DonationBO(
+                                donationId = donationId,
+                                numberOfPersons = numberOfPersons,
+                                userName = userName,
+                                time = time,
+                                userId = userDetail.userId,
+                                address = address,
+                                notes = notes,
+                                phoneNumber = phoneNumber,
+                                donationStatus = DonationStatus.Initialised.key,
+                            )
+                            database.child(donationId).setValue(donation)
+                                .addOnSuccessListener {
+                                    navController.navigate(NavRoute.ListScreen.route)
+                                    {
+                                        popUpTo("foodFormScreen/{FormType}") {
+                                            inclusive = true
+                                        }
                                     }
                                 }
-                            }
-                            .addOnFailureListener {
-                                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-                            }
+                                .addOnFailureListener {
+                                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                        else
+                        {
+                            val donation = DonationBO(
+                                numberOfPersons = numberOfPersons,
+                                userName = userName,
+                                time = time,
+                                userId = userDetail.userId,
+                                address = address,
+                                notes = notes,
+                                phoneNumber = phoneNumber,
+                                donationStatus = DonationStatus.Initialised.key,
+                                requestId = donationId
+                            )
+                            receiverDB.child(donationId).setValue(donation)
+                                .addOnSuccessListener {
+                                    navController.navigate(NavRoute.ListScreen.route)
+                                    {
+                                        popUpTo("foodFormScreen/{FormType}") {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+                                }
+                        }
                     } else {
                         Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
 
@@ -63,8 +98,4 @@ class FormScreenVM:FormScreenModel() {
             Log.d("FormScreen",e.toString())
         }
     }
-//
-//    fun nameUnFocusChange() {
-//
-//    }
 }

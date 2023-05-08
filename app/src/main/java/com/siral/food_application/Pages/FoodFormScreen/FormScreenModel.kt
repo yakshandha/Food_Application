@@ -21,5 +21,6 @@ open class FormScreenModel :ViewModel() {
     var isNameError by mutableStateOf(false)
 
     lateinit var database: DatabaseReference
+    lateinit var receiverDB : DatabaseReference
 
 }

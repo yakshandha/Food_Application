@@ -10,11 +10,12 @@ import com.siral.food_application.Pages.DonationDetailScreen.DonationDetailScree
 import com.siral.food_application.Pages.FoodFormScreen.FormScreen
 import com.siral.food_application.Pages.ListScreen.ListScreen
 import com.siral.food_application.Pages.LoginScreen.LoginScreen
-import com.siral.food_application.Pages.ProfileScreen.ProfileScreen
+import com.siral.food_application.Pages.UserProfileFlow.ProfileScreen.ProfileScreen
 import com.siral.food_application.Pages.SignUpScreen.SignUpScreen
 import com.siral.food_application.Pages.SplashScreen.SplashScreen
 import com.siral.food_application.Pages.UserProfileFlow.DonationRequests.DonationRequestListScreen
-import com.siral.food_application.Pages.UserProfileFlow.UserSelectScreen.UserSelectScreen
+import com.siral.food_application.Pages.UserProfileFlow.RequestedListScreen.RequestListScreen
+import com.siral.food_application.Pages.UserSelectScreen.UserSelectScreen
 
 @Composable
 fun Navigation(navController: NavHostController)
@@ -50,13 +51,17 @@ fun Navigation(navController: NavHostController)
         {
             ProfileScreen(navController)
         }
-        composable(NavRoute.DonationDetailScreen.route)
+        composable("donationDetailScreen/{userType}", arguments = listOf(navArgument("userType"){type = NavType.BoolType}))
         {
-            DonationDetailScreen(navController)
+            DonationDetailScreen(navController,it.arguments?.getBoolean("userType"))
         }
         composable(NavRoute.DonationRequestScreen.route)
         {
             DonationRequestListScreen(navController)
+        }
+        composable(NavRoute.RequestListScreen.route)
+        {
+            RequestListScreen(navController = navController)
         }
 
     }

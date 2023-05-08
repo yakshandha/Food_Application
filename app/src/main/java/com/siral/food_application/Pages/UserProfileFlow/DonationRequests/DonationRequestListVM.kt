@@ -13,8 +13,7 @@ import com.siral.food_application.BOs.DonationBO
 import com.siral.food_application.BOs.DonationRequestBO
 import com.siral.food_application.BOs.DonationStatus
 import com.siral.food_application.BOs.SignUpBO
-import com.siral.food_application.Helpers.CommonUtils.CommonUtils.donationDetailBO
-import com.siral.food_application.NavigationHelpers.NavRoute
+import com.siral.food_application.Helpers.CommonUtils.CommonUtils.userDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -29,8 +28,8 @@ class DonationRequestListVM : DonationRequestListModel() {
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 var list = mutableListOf<DonationBO>()
-                Log.d("jijo", donationDetailBO.donationId)
-                val query = database.orderByChild("donationId").equalTo(donationDetailBO.donationId)
+                Log.d("jijo", userDetail.userId)
+                val query = database.orderByChild("userId").equalTo(userDetail.userId)
                     .addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if(snapshot.exists()) {
@@ -44,6 +43,7 @@ class DonationRequestListVM : DonationRequestListModel() {
                                 }
                                 list = list.filter { it.donationStatus == DonationStatus.Requested.key } as MutableList<DonationBO>
                                 getData(list)
+                                loading = false
                             }
                             else
                             {
@@ -51,7 +51,6 @@ class DonationRequestListVM : DonationRequestListModel() {
                                 noRequest = true
                             }
                         }
-
                         override fun onCancelled(error: DatabaseError) {
                             // Handle the error as needed
                             Log.e(
@@ -62,7 +61,6 @@ class DonationRequestListVM : DonationRequestListModel() {
                         }
                     })
             }
-
         }
         catch(e : Exception)
         {

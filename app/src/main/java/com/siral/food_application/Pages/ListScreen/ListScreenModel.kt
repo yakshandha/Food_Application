@@ -12,6 +12,7 @@ open class ListScreenModel: ViewModel() {
 
     lateinit var database: DatabaseReference
     var donationList = MutableLiveData<List<DonationBO>>()
+    var receiverList = MutableLiveData<List<DonationBO>>()
     var loading by mutableStateOf(true)
 
 }

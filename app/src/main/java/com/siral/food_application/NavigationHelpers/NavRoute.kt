@@ -10,7 +10,8 @@ enum class NavRoute(val route:String) {
     UserSelectScreen("userSelect"),
     ProfileScreen("profileScreen"),
     DonationDetailScreen("donationDetailScreen"),
-    DonationRequestScreen("donationRequestScreen")
+    DonationRequestScreen("donationRequestScreen"),
+    RequestListScreen("requestListScreen")
 //    FoodFormScreen("foodFormScreen/{FormType}")
 }
 

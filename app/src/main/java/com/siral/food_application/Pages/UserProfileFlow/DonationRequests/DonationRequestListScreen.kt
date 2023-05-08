@@ -51,10 +51,11 @@ fun DonationRequestListScreen(navController : NavHostController,vm : DonationReq
     if(vm.noRequest)
         Column(modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),horizontalAlignment = Alignment.CenterHorizontally,
+            .background(Color.White),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ){
-            Text(text = "Requests Not Found!!", style = urbanSemiBold)
+            Text(text = "You Have No Donation Requests!!", style = urbanSemiBold)
         }
     else {
         Column(modifier = Modifier.fillMaxSize())
@@ -233,7 +234,7 @@ fun DonationRequestListScreen(navController : NavHostController,vm : DonationReq
                                     contentColor = Color.Black
                                 ),
                                 modifier = Modifier
-                                    .padding(top = 10.dp)
+                                    .padding(top = 10.dp, bottom = 10.dp)
                                     .height(40.dp)
                                     .align(Alignment.CenterHorizontally)
                             )

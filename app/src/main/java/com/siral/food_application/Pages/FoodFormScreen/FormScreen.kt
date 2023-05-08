@@ -1,5 +1,6 @@
 package com.siral.food_application.Pages.FoodFormScreen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,6 +8,8 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -32,14 +35,26 @@ fun FormScreen(navController: NavHostController, userType: String?,formScreenVM:
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
         .padding(horizontal = 20.dp, vertical = 20.dp)) {
-        Text(
-            text = if(userType=="Donate")"Donation Details" else "Receiver Details",
-            color = Teal200,
-            fontSize = 35.sp,
-            textAlign = TextAlign.Center,
-            style = urbanBold,
-            modifier = Modifier.align(CenterHorizontally)
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(top=15.dp),
+            verticalAlignment = Alignment.CenterVertically) {
+            Icon(imageVector = Icons.Default.KeyboardArrowLeft,
+                contentDescription = "backArrow",
+                modifier = Modifier
+                    .padding(end = 20.dp)
+                    .size(30.dp)
+                    .clickable {
+                        navController.popBackStack()
+                    })
+            Text(
+                text = if (userType == "Donate") "Donation Details" else "Receiver Details",
+                color = Teal200,
+                fontSize = 30.sp,
+                textAlign = TextAlign.Center,
+                style = urbanBold,
+            )
+        }
         OutlinedTextField(
             value = formScreenVM.userName,
             onValueChange = { it ->
